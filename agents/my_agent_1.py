@@ -1,10 +1,14 @@
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 import numpy as np
 import random
 from collections import deque
 from pytorch_mlp import MLPRegression, DEVICE
 import argparse
-from console import FlappyBirdEnv
 
+from console import FlappyBirdEnv
 STUDENT_ID = 'a1234567'
 DEGREE = 'UG'  # or 'PG'
 
@@ -62,15 +66,15 @@ class MyAgent:
         φ = [ bird_y_norm, bird_v_norm,
               horiz_dist_to_next_pipe, vert_dist_to_gap_center ]
         """
-        bird_x = state['bird_x']
-        bird_y = state['bird_y']
-        bird_velocity = state['bird_velocity']
-        screen_width = state['screen_width']
-        screen_height = state['screen_height']
-        pipes = state['pipes']
+        bird_x          = state['bird_x']
+        bird_y          = state['bird_y']
+        bird_velocity   = state['bird_velocity']
+        screen_width    = state['screen_width']
+        screen_height   = state['screen_height']
+        pipes           = state['pipes']
 
         # find next pipe
-        next_pipe = next((pipe for pipe in pipes if pipe['x'] + pipe['width'] >= bird_x), None)
+        next_pipe       = next((pipe for pipe in pipes if pipe['x'] + pipe['width'] >= bird_x), None)
 
         if next_pipe is None:
             next_pipe_dist_to_bird = screen_width
